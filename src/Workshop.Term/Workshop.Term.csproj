@@ -1,26 +1,33 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <AssemblyName>Felix</AssemblyName>
-        <RootNamespace>Felix.Term</RootNamespace>
+        <AssemblyName>mlworkshop</AssemblyName>
+        <StartupObject>Workshop.Term.Program</StartupObject>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.ML" Version="1.4.0" />
-        <PackageReference Include="Microsoft.ML.FastTree" Version="1.4.0" />
         <PackageReference Include="CommandLineParser" Version="2.7.82" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Workshop.Models\Workshop.Models.csproj" />
+        <ProjectReference Include="..\Workshop.ML\Workshop.ML.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="training\housedata.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+        <None Update="prediction\CarInventory.csv">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="training\CarInventoryTest.csv">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="training\EmploymentHistoryTest.csv">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="training\RestaurantFeedbackTest.csv">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
 </Project>
