@@ -1,0 +1,4 @@
+extensions: designer.cs generated.cs
+extensions: .cs .cpp .h
+// This project is licensed under the MIT license.
+// See the LICENSE file in the project root for more information.
