@@ -22,8 +22,9 @@ namespace Workshop.ML.Chap2
                 return;
             }
 
-            var trainingDataView = MlContext.Data.LoadFromTextFile<RestaurantFeedback>(TrainingFile);
+            var trainingDataView = MlContext.Data.LoadFromTextFile<RestaurantFeedback>(TrainingFile,  separatorChar: ',');
 
+            // Sample data is split into training and test by 20%
             var dataSplit = MlContext.Data.TrainTestSplit(trainingDataView, testFraction: 0.2);
 
             var processPipeline = MlContext.Transforms.Text.FeaturizeText(

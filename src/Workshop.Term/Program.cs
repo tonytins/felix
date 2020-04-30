@@ -5,31 +5,50 @@ using Workshop.ML.Chap2;
 
 namespace Workshop.Term
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
             Parser.Default.ParseArguments<TrainOption, PredictOption>(args)
                 .WithParsed<TrainOption>(o =>
                 {
-                    switch (o.Chapter)
-                    {
-                        case Chapters.Chap2:
-                            var chap2 = new Chap2Trainer();
-                            chap2.Train();
-                            break;
-                    }
+                    Trainer(o.Chapter);
                 })
                 .WithParsed<PredictOption>(o =>
                 {
-                    switch (o.Chapter)
-                    {
-                        case Chapters.Chap2:
-                            var chap2 = new Chap2Predictor(o.Input);
-                            chap2.Predict();
-                            break;
-                    }
+                    Predictor(o.Chapter, o.Input);
                 });
+
+        }
+
+        static void Trainer(string chap)
+        {
+            switch (chap)
+            {
+                case Chapters.Chap2:
+                    var chap2 = new Chap2Trainer();
+                    chap2.Train();
+                    break;
+                case Chapters.Chap31:
+                    break;
+                case Chapters.Chap32:
+                    break;
+            }
+        }
+
+        static void Predictor(string chap, string input)
+        {
+            switch (chap)
+            {
+                case Chapters.Chap2:
+                    var chap2 = new Chap2Predictor(input);
+                    chap2.Predict();
+                    break;
+                case Chapters.Chap31:
+                    break;
+                case Chapters.Chap32:
+                    break;
+            }
         }
     }
 }
