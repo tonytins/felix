@@ -1,8 +1,6 @@
 // This project is licensed under the MIT license.
 // See the LICENSE file in the project root for more information.
 using System;
-using System.IO;
-using Microsoft.ML;
 using Workshop.Common;
 using Workshop.Models.Restaurant;
 
@@ -16,28 +14,13 @@ namespace Workshop.ML.Chap2
         }
 
         public string Input { get; set; }
-        public string ModelPath => WorkshopHelper.GetModelPath("RestaurantFeedback.zip");
+        public string ModelFile => WorkshopHelper.GetModelPath("RestaurantFeedback.zip");
 
         public void Predict()
         {
-            if (!File.Exists(ModelPath))
-            {
-                Console.WriteLine($"Could not located model at {ModelPath}");
-                return;
-            }
+            var mlModel = WorkshopHelper.GetModelData(Context, ModelFile);
 
-            ITransformer mlModel;
-
-            using var stream = new FileStream(ModelPath, FileMode.Open, FileAccess.Read, FileShare.Read);
-            mlModel = MlContext.Model.Load(stream, out _);
-
-            if (mlModel == null)
-            {
-                Console.WriteLine("Failed to load model");
-                return;
-            }
-
-            var predictionEng = MlContext.Model.CreatePredictionEngine<RestaurantFeedback, RestaurantPrediction>(mlModel);
+            var predictionEng = Context.Model.CreatePredictionEngine<RestaurantFeedback, RestaurantPrediction>(mlModel);
 
             var predict = predictionEng.Predict(new RestaurantFeedback { Text = Input });
 

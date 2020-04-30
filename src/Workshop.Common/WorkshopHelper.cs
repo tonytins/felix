@@ -2,29 +2,46 @@
 // See the LICENSE file in the project root for more information.
 using System;
 using System.IO;
+using Microsoft.ML;
 
 namespace Workshop.Common
 {
     public static class WorkshopHelper
     {
-        public static string GetTrainingData(string file)
-        {
-            return Path.Combine(AppContext.BaseDirectory, "training", file);
-        }
+        static readonly string _trainingPath = Path.Combine(AppContext.BaseDirectory, "training");
+        static readonly string _predictionPath = Path.Combine(AppContext.BaseDirectory, "prediction");
 
-        public static string GetPredictionData(string file)
+        public static string GetTrainingDataFile(string file) => Path.Combine(_trainingPath, file);
+
+        public static string GetPredictionDataFile(string file) => Path.Combine(_predictionPath, file);
+
+        public static IDataView GetTrainingData<T>(MLContext context, string file, char sepChar = ',')
         {
-            return Path.Combine(AppContext.BaseDirectory, "prediction", file);
+            var path = Path.Combine(_trainingPath, file);
+            var trainingDataView = context.Data.LoadFromTextFile<T>(path, separatorChar: sepChar);
+            return context.Data.ShuffleRows(trainingDataView);
         }
 
         public static string GetModelPath(string file)
         {
-            var modelDir = Path.Combine(AppContext.BaseDirectory, "models");
+            var path = Path.Combine(AppContext.BaseDirectory, "models");
 
-            if (!Directory.Exists(modelDir))
-                Directory.CreateDirectory(modelDir);
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
 
-            return Path.Combine(modelDir, file);
+            return Path.Combine(path, file);
+        }
+
+        public static ITransformer GetModelData(MLContext context, string file)
+        {
+            var path = GetModelPath(file);
+            using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+            var mlModel = context.Model.Load(stream, out _);
+
+            if (mlModel == null)
+                Console.WriteLine("Failed to load model");
+
+            return mlModel;
         }
     }
 }

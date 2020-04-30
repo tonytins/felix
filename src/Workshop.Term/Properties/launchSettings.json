@@ -1,8 +1,8 @@
 {
-  "profiles": {
-    "Workshop.Term": {
-      "commandName": "Project",
-      "commandLineArgs": "train -c chap2"
+    "profiles": {
+        "Workshop.Term": {
+            "commandName": "Project",
+            "commandLineArgs": "train -c chap2"
+        }
     }
-  }
 }

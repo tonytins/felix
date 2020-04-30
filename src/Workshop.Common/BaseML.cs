@@ -6,11 +6,6 @@ namespace Workshop.Common
 {
     public class BaseML
     {
-        protected MLContext MlContext { get; set; }
-
-        protected BaseML()
-        {
-            MlContext = new MLContext(2020);
-        }
+        protected MLContext Context => new MLContext(2020);
     }
 }
