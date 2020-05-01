@@ -10,13 +10,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		..\.gitignore = ..\.gitignore
 		MLWorkshop.sln.licenseheader = MLWorkshop.sln.licenseheader
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Workshop.Common", "Workshop.Common\Workshop.Common.csproj", "{0BA58AE6-E479-4B8B-AA7B-8425A328E1A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workshop.ML", "Workshop.ML\Workshop.ML.csproj", "{C5D5050D-37AF-4164-AB08-320BB5B1D453}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Workshop.ML", "Workshop.ML\Workshop.ML.csproj", "{C5D5050D-37AF-4164-AB08-320BB5B1D453}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Workshop.Term", "Workshop.Term\Workshop.Term.csproj", "{2A126A72-957D-4B22-A9B9-66793850B229}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Workshop.Term", "Workshop.Term\Workshop.Term.csproj", "{2A126A72-957D-4B22-A9B9-66793850B229}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

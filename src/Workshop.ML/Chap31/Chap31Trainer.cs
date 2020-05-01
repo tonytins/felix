@@ -15,7 +15,7 @@ namespace Workshop.ML.Chap31
         public void Train()
         {
             var trainingData = WorkshopHelper.GetTrainingDataFile("CarInventoryTest.csv");
-            var trainingDataView = WorkshopHelper.GetTrainingData<CarInventory>(Context, trainingData);
+            var trainingDataView = WorkshopHelper.LoadTrainingData<CarInventory>(Context, trainingData);
 
             // Split sample data into training and test
             var dataSplit = Context.Data.TrainTestSplit(trainingDataView, testFraction: 0.2);

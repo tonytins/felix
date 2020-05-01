@@ -4,7 +4,6 @@ namespace Workshop.Common
 {
     public interface IPredict
     {
-        public string ModelFile { get; }
         public void Predict();
     }
 }

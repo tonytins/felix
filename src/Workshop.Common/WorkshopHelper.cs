@@ -15,10 +15,10 @@ namespace Workshop.Common
 
         public static string GetPredictionDataFile(string file) => Path.Combine(_predictionPath, file);
 
-        public static IDataView GetTrainingData<T>(MLContext context, string file, char sepChar = ',')
+        public static IDataView LoadTrainingData<T>(MLContext context, string file, char sepChar = ',', bool header = false)
         {
             var path = Path.Combine(_trainingPath, file);
-            var trainingDataView = context.Data.LoadFromTextFile<T>(path, separatorChar: sepChar);
+            var trainingDataView = context.Data.LoadFromTextFile<T>(path, separatorChar: sepChar, hasHeader: header);
             return context.Data.ShuffleRows(trainingDataView);
         }
 
@@ -35,8 +35,8 @@ namespace Workshop.Common
         public static ITransformer GetModelData(MLContext context, string file)
         {
             var path = GetModelPath(file);
-            using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
-            var mlModel = context.Model.Load(stream, out _);
+            using var model = File.OpenRead(path);
+            var mlModel = context.Model.Load(model, out _);
 
             if (mlModel == null)
                 Console.WriteLine("Failed to load model");

@@ -16,7 +16,7 @@ namespace Workshop.ML.Chap2
         public void Train()
         {
             var trainingData = WorkshopHelper.GetTrainingDataFile("RestaurantFeedbackTraining.csv");
-            var trainingDataView = WorkshopHelper.GetTrainingData<RestaurantFeedback>(Context, trainingData);
+            var trainingDataView = WorkshopHelper.LoadTrainingData<RestaurantFeedback>(Context, trainingData);
 
             // Split sample data into training and test
             var dataSplit = Context.Data.TrainTestSplit(trainingDataView, testFraction: 0.2);

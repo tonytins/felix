@@ -14,11 +14,11 @@ namespace Workshop.ML.Chap2
         }
 
         public string Input { get; set; }
-        public string ModelFile => WorkshopHelper.GetModelPath("RestaurantFeedback.zip");
 
         public void Predict()
         {
-            var mlModel = WorkshopHelper.GetModelData(Context, ModelFile);
+            var modelFile = WorkshopHelper.GetModelPath("RestaurantFeedback.zip");
+            var mlModel = WorkshopHelper.GetModelData(Context, modelFile);
 
             var predictionEng = Context.Model.CreatePredictionEngine<RestaurantFeedback, RestaurantPrediction>(mlModel);
 

@@ -9,8 +9,6 @@ namespace Workshop.ML.Chap31
 {
     class Chap31Predictor : BaseML, IPredict
     {
-        public string ModelFile => throw new NotImplementedException();
-
         string JsonFile { get; set; }
 
         public Chap31Predictor(string file)
@@ -20,7 +18,8 @@ namespace Workshop.ML.Chap31
 
         public void Predict()
         {
-            var mlModel = WorkshopHelper.GetModelData(Context, ModelFile);
+            var modelFile = WorkshopHelper.GetModelPath("RestaurantFeedback.zip");
+            var mlModel = WorkshopHelper.GetModelData(Context, modelFile);
 
             var predictionEng = Context.Model.CreatePredictionEngine<CarInventory, CarInventoryPrediction>(mlModel);
 
@@ -29,7 +28,8 @@ namespace Workshop.ML.Chap31
             Console.WriteLine(
                 $"Based on input json:{Environment.NewLine}" +
                 $"{JsonFile}{Environment.NewLine}" +
-                $"The car price is a {(predict.PredictedLabel ? "good" : "bad")} deal, with a {predict.Probability:P0} confidence");
+                $"The car price is a {(predict.PredictedLabel ? "good" : "bad")} " +
+                $"deal, with a {predict.Probability:P0} confidence");
         }
     }
 }
