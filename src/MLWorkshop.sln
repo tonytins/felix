@@ -48,4 +48,9 @@ Global
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7F35A2A8-EA7E-494F-BA82-D83AC6319CBD}
 	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.StandardHeader = $1
+		$1.Text = @This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.\nIf a copy of the MPL was not distributed with this file, You can obtain one at\r\nhttp://mozilla.org/MPL/2.0/.
+	EndGlobalSection
 EndGlobal
