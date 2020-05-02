@@ -1,5 +1,7 @@
 // This project is licensed under the MPL 2.0 license.
 // See the LICENSE file in the project root for more information.
+using System;
+using ConsoleTables;
 using CommandLine;
 using Workshop.ML.Chap2;
 
@@ -12,7 +14,7 @@ namespace Workshop.Term
             Parser.Default.ParseArguments<TrainOption, PredictOption>(args)
                 .WithParsed<TrainOption>(o =>
                 {
-                    Trainer(o.Chapter);
+                    Trainer(o.Chapter, o.Input);
                 })
                 .WithParsed<PredictOption>(o =>
                 {
@@ -21,7 +23,24 @@ namespace Workshop.Term
 
         }
 
-        static void Trainer(string chap)
+        static void PrintTable()
+        {
+            var cmdTable = new ConsoleTable("Command", "Description", "Input");
+
+            cmdTable.AddRow("chap2", "Restaurant reviews", "Prediction");
+            cmdTable.Write(Format.Minimal);
+
+            var inputTable = new ConsoleTable("Input", "Description");
+
+            inputTable.AddRow("Prediction", "Requires input only for prediction");
+            inputTable.AddRow("Training", "Requires input only for training");
+            inputTable.AddRow("Both", "Both sections require input");
+            inputTable.Write(Format.Minimal);
+
+            Console.WriteLine("Usage: mlworkshop [train|predict] -c [command] -i [input]");
+        }
+
+        static void Trainer(string chap, string input)
         {
             switch (chap)
             {
@@ -32,6 +51,9 @@ namespace Workshop.Term
                 case Chapters.Chap31:
                     break;
                 case Chapters.Chap32:
+                    break;
+                default:
+                    PrintTable();
                     break;
             }
         }
@@ -47,6 +69,9 @@ namespace Workshop.Term
                 case Chapters.Chap31:
                     break;
                 case Chapters.Chap32:
+                    break;
+                default:
+                    PrintTable();
                     break;
             }
         }

@@ -4,15 +4,7 @@ using CommandLine;
 
 namespace Workshop.Term
 {
-    [Verb("train")]
-    public class TrainOption
-    {
-        [Option('c', "chapter")]
-        public string Chapter { get; set; }
-    }
-
-    [Verb("predict")]
-    public class PredictOption
+    public class BaseOptions
     {
         [Option('c', "chapter")]
         public string Chapter { get; set; }
@@ -20,4 +12,10 @@ namespace Workshop.Term
         [Option('i', "input")]
         public string Input { get; set; }
     }
+
+    [Verb("train")]
+    public class TrainOption : BaseOptions { }
+
+    [Verb("predict")]
+    public class PredictOption : BaseOptions { }
 }
