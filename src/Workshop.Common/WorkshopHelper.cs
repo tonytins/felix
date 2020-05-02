@@ -9,8 +9,8 @@ namespace Workshop.Common
 {
     public static class WorkshopHelper
     {
-        static readonly string _trainingPath = Path.Combine(AppContext.BaseDirectory, "training");
-        static readonly string _predictionPath = Path.Combine(AppContext.BaseDirectory, "prediction");
+        static readonly string _trainingPath = Path.Combine(AppContext.BaseDirectory, "data", "training");
+        static readonly string _predictionPath = Path.Combine(AppContext.BaseDirectory, "data", "prediction");
 
         public static string GetTrainingDataFile(string file) => Path.Combine(_trainingPath, file);
 
@@ -18,14 +18,21 @@ namespace Workshop.Common
 
         public static IDataView LoadTrainingData<T>(MLContext context, string file, char sepChar = ',', bool header = false)
         {
-            var path = Path.Combine(_trainingPath, file);
-            var trainingDataView = context.Data.LoadFromTextFile<T>(path, separatorChar: sepChar, hasHeader: header);
-            return context.Data.ShuffleRows(trainingDataView);
+            try
+            {
+                var path = Path.Combine(_trainingPath, file);
+                var trainingDataView = context.Data.LoadFromTextFile<T>(path, separatorChar: sepChar, hasHeader: header);
+                return context.Data.ShuffleRows(trainingDataView);
+            }
+            catch (IOException err)
+            {
+                throw new IOException($"Failed to load training data.{Environment.NewLine}{err.StackTrace}");
+            }
         }
 
         public static string GetModelPath(string file)
         {
-            var path = Path.Combine(AppContext.BaseDirectory, "models");
+            var path = Path.Combine(AppContext.BaseDirectory, "data", "models");
 
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
@@ -35,14 +42,18 @@ namespace Workshop.Common
 
         public static ITransformer GetModelData(MLContext context, string file)
         {
-            var path = GetModelPath(file);
-            using var model = File.OpenRead(path);
-            var mlModel = context.Model.Load(model, out _);
+            try
+            {
+                var path = GetModelPath(file);
+                using var model = File.OpenRead(path);
+                var mlModel = context.Model.Load(model, out _);
 
-            if (mlModel == null)
-                Console.WriteLine("Failed to load model");
+                return mlModel;
 
-            return mlModel;
+            } catch (IOException err)
+            {
+                throw new IOException($"Failed to load model{Environment.NewLine}{err.StackTrace}");
+            }
         }
     }
 }

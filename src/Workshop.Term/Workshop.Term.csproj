@@ -17,17 +17,17 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="training\CarInventoryTraining.csv">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <None Update="data\training\CarInventoryTest.csv">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="training\CarInventoryTest.csv">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <None Update="data\training\CarInventoryTraining.csv">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="training\EmploymentHistoryTraining.csv">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <None Update="data\training\EmploymentHistoryTraining.csv">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="training\RestaurantFeedbackTraining.csv">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        <None Update="data\training\RestaurantFeedbackTraining.csv">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
     </ItemGroup>
 
