@@ -9,28 +9,34 @@ using Workshop.Models.SpamDetect;
 
 namespace Workshop.ML.Packet.MultiClass
 {
-    class Chap31Predictor : BaseML, IPredict
+    public class PktMultiClassPredict : BaseML, IPredict
     {
         string JsonFile { get; set; }
 
-        public Chap31Predictor(string file)
+        public PktMultiClassPredict(string file)
         {
             JsonFile = file;
         }
 
         public void Predict()
         {
-            var modelFile = WorkshopHelper.GetModelPath("RestaurantFeedback.zip");
+            var modelFile = WorkshopHelper.GetModelPath("packt", "RestaurantFeedback.zip");
             var mlModel = WorkshopHelper.GetModelData(Context, modelFile);
 
             var predictionEng = Context.Model.CreatePredictionEngine<Email, EmailPrediction>(mlModel);
 
-            var predict = predictionEng.Predict(JsonConvert.DeserializeObject<Email>(JsonFile));
+            var emails = JsonConvert.DeserializeObject<Email[]>(JsonFile);
+            
 
-            Console.WriteLine(
+            foreach (var email in emails)
+            {
+                var predictions = predictionEng.Predict(email);
+                Console.WriteLine(
                 $"Based on input json:{Environment.NewLine}" +
                 $"{JsonFile}{Environment.NewLine}" +
-                $"The email is predicted to be a {predict.Category}");
+                $"The email is predicted to be a {predictions.Category}");
+            }
+            
         }
     }
 }

@@ -29,6 +29,12 @@
         <None Update="data\packet\RestaurantFeedbackTraining.csv">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
+        <None Update="data\prediction\email.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
     
+    <ItemGroup>
+      <Folder Include="data\prediction\" />
+    </ItemGroup>
 </Project>

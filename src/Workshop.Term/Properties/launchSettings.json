@@ -2,7 +2,7 @@
     "profiles": {
         "Workshop.Term": {
             "commandName": "Project",
-            "commandLineArgs": "train -c chap2"
+            "commandLineArgs": "train -c pkt-multiclass"
         }
     }
 }

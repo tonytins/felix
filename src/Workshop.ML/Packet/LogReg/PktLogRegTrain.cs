@@ -8,12 +8,12 @@ using Workshop.Models.Restaurant;
 
 namespace Workshop.ML.Packet.LogisticRegression
 {
-    public class Chap2Trainer : BaseML, ITrainer
+    public class PktLogRegTrain : BaseML, ITrainer
     {
         public void Train()
         {
             var modelPath = WorkshopHelper.GetModelPath("RestaurantFeedback.zip"); 
-            var trainingData = WorkshopHelper.GetTrainingDataFile("packet", "RestaurantFeedbackTraining.csv");
+            var trainingData = WorkshopHelper.GetTrainingDataFile("packet", "packt", "RestaurantFeedbackTraining.csv");
             var trainingDataView = WorkshopHelper.LoadTrainingData<RestaurantFeedback>(Context, trainingData);
 
             // Split sample data into training and test
@@ -24,7 +24,8 @@ namespace Workshop.ML.Packet.LogisticRegression
                 inputColumnName: nameof(RestaurantFeedback.Text));
 
             var trainer = Context.BinaryClassification.Trainers.SdcaLogisticRegression(labelColumnName: nameof(RestaurantFeedback.Label),
-                featureColumnName: "Features");
+                featureColumnName: "Features")
+                .AppendCacheCheckpoint(Context);
 
             var trainingPipeline = processPipeline.Append(trainer);
 

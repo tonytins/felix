@@ -7,9 +7,9 @@ using Workshop.Models.Restaurant;
 
 namespace Workshop.ML.Packet.LogisticRegression
 {
-    public class Chap2Predictor : BaseML, IPredict
+    public class PktLogRegPredict : BaseML, IPredict
     {
-        public Chap2Predictor(string input)
+        public PktLogRegPredict(string input)
         {
             Input = input;
         }

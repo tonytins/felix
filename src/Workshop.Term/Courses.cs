@@ -5,7 +5,7 @@ namespace Workshop.Term
 {
     internal struct Courses
     {
-        public const string Chap2 = "pkt-logreg";
-        public const string Chap31 = "pkt-multiclass";
+        public const string PktLogReg = "pkt-logreg";
+        public const string PktMultiClass = "pkt-multiclass";
     }
 }

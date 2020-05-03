@@ -5,6 +5,10 @@ using System;
 using ConsoleTables;
 using CommandLine;
 using Workshop.ML.Packet.LogisticRegression;
+using Workshop.ML.Packet.MultiClass;
+using Workshop.Common;
+using System.Text.Json;
+using Workshop.Models.SpamDetect;
 
 namespace Workshop.Term
 {
@@ -38,11 +42,13 @@ namespace Workshop.Term
         {
             switch (chap)
             {
-                case Courses.Chap2:
-                    var chap2 = new Chap2Trainer();
+                case Courses.PktLogReg:
+                    var chap2 = new PktLogRegTrain();
                     chap2.Train();
                     break;
-                case Courses.Chap31:
+                case Courses.PktMultiClass:
+                    var pktMultiTrain = new PktMultiClassTrain();
+                    pktMultiTrain.Train();
                     break;
                 default:
                     PrintTable();
@@ -54,11 +60,14 @@ namespace Workshop.Term
         {
             switch (chap)
             {
-                case Courses.Chap2:
-                    var chap2 = new Chap2Predictor(input);
+                case Courses.PktLogReg:
+                    var chap2 = new PktLogRegPredict(input);
                     chap2.Predict();
                     break;
-                case Courses.Chap31:
+                case Courses.PktMultiClass:
+                    var emailJson = WorkshopHelper.GetPredictionDataFile(input);
+                    var pktMultiPredict = new PktMultiClassPredict(emailJson);
+                    pktMultiPredict.Predict();
                     break;
                 default:
                     PrintTable();
