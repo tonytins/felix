@@ -5,8 +5,9 @@ using System;
 using Workshop.Common;
 using Workshop.Models.Inventory;
 using Newtonsoft.Json;
+using Workshop.Models.SpamDetect;
 
-namespace Workshop.ML.Chap31
+namespace Workshop.ML.Packet.MultiClass
 {
     class Chap31Predictor : BaseML, IPredict
     {
@@ -22,15 +23,14 @@ namespace Workshop.ML.Chap31
             var modelFile = WorkshopHelper.GetModelPath("RestaurantFeedback.zip");
             var mlModel = WorkshopHelper.GetModelData(Context, modelFile);
 
-            var predictionEng = Context.Model.CreatePredictionEngine<CarInventory, CarInventoryPrediction>(mlModel);
+            var predictionEng = Context.Model.CreatePredictionEngine<Email, EmailPrediction>(mlModel);
 
-            var predict = predictionEng.Predict(JsonConvert.DeserializeObject<CarInventory>(JsonFile));
+            var predict = predictionEng.Predict(JsonConvert.DeserializeObject<Email>(JsonFile));
 
             Console.WriteLine(
                 $"Based on input json:{Environment.NewLine}" +
                 $"{JsonFile}{Environment.NewLine}" +
-                $"The car price is a {(predict.PredictedLabel ? "good" : "bad")} " +
-                $"deal, with a {predict.Probability:P0} confidence");
+                $"The email is predicted to be a {predict.Category}");
         }
     }
 }

@@ -3,10 +3,9 @@
 // http://mozilla.org/MPL/2.0/.
 namespace Workshop.Term
 {
-    internal struct Chapters
+    internal struct Courses
     {
-        public const string Chap2 = "chap2";
-        public const string Chap31 = "chap3-1";
-        public const string Chap32 = "chap3-2";
+        public const string Chap2 = "pkt-logreg";
+        public const string Chap31 = "pkt-multiclass";
     }
 }

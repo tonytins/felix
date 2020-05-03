@@ -6,17 +6,14 @@ using Microsoft.ML;
 using Workshop.Common;
 using Workshop.Models.Restaurant;
 
-namespace Workshop.ML.Chap2
+namespace Workshop.ML.Packet.LogisticRegression
 {
     public class Chap2Trainer : BaseML, ITrainer
     {
-        public string TrainingDataFile => WorkshopHelper.GetTrainingDataFile("RestaurantFeedbackTest.csv");
-
-        public string ModelPath => WorkshopHelper.GetModelPath("RestaurantFeedback.zip");
-
         public void Train()
         {
-            var trainingData = WorkshopHelper.GetTrainingDataFile("RestaurantFeedbackTraining.csv");
+            var modelPath = WorkshopHelper.GetModelPath("RestaurantFeedback.zip"); 
+            var trainingData = WorkshopHelper.GetTrainingDataFile("packet", "RestaurantFeedbackTraining.csv");
             var trainingDataView = WorkshopHelper.LoadTrainingData<RestaurantFeedback>(Context, trainingData);
 
             // Split sample data into training and test
@@ -33,7 +30,7 @@ namespace Workshop.ML.Chap2
 
             var trainedModel = trainingPipeline.Fit(dataSplit.TrainSet);
 
-            Context.Model.Save(trainedModel, dataSplit.TrainSet.Schema, ModelPath);
+            Context.Model.Save(trainedModel, dataSplit.TrainSet.Schema, modelPath);
 
             var testSetTransform = trainedModel.Transform(dataSplit.TestSet);
 

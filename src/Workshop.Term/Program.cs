@@ -4,7 +4,7 @@
 using System;
 using ConsoleTables;
 using CommandLine;
-using Workshop.ML.Chap2;
+using Workshop.ML.Packet.LogisticRegression;
 
 namespace Workshop.Term
 {
@@ -26,17 +26,10 @@ namespace Workshop.Term
 
         static void PrintTable()
         {
-            var cmdTable = new ConsoleTable("Command", "Description", "Input");
+            var cmdTable = new ConsoleTable("Command", "Description");
 
-            cmdTable.AddRow("chap2", "Restaurant reviews", "Prediction");
+            cmdTable.AddRow("pkt-logreg", "Restaurant reviews");
             cmdTable.Write(Format.Minimal);
-
-            var inputTable = new ConsoleTable("Input", "Description");
-
-            inputTable.AddRow("Prediction", "Requires input only for prediction");
-            inputTable.AddRow("Training", "Requires input only for training");
-            inputTable.AddRow("Both", "Both sections require input");
-            inputTable.Write(Format.Minimal);
 
             Console.WriteLine("Usage: mlworkshop [train|predict] -c [command] -i [input]");
         }
@@ -45,13 +38,11 @@ namespace Workshop.Term
         {
             switch (chap)
             {
-                case Chapters.Chap2:
+                case Courses.Chap2:
                     var chap2 = new Chap2Trainer();
                     chap2.Train();
                     break;
-                case Chapters.Chap31:
-                    break;
-                case Chapters.Chap32:
+                case Courses.Chap31:
                     break;
                 default:
                     PrintTable();
@@ -63,13 +54,11 @@ namespace Workshop.Term
         {
             switch (chap)
             {
-                case Chapters.Chap2:
+                case Courses.Chap2:
                     var chap2 = new Chap2Predictor(input);
                     chap2.Predict();
                     break;
-                case Chapters.Chap31:
-                    break;
-                case Chapters.Chap32:
+                case Courses.Chap31:
                     break;
                 default:
                     PrintTable();

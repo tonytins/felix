@@ -5,8 +5,6 @@ namespace Workshop.Common
 {
     public interface ITrainer
     {
-        public string ModelPath { get; }
-        public string TrainingDataFile { get; }
         public void Train();
     }
 }

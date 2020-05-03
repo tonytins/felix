@@ -10,11 +10,11 @@ namespace Workshop.Common
     public static class WorkshopHelper
     {
         static readonly string _trainingPath = Path.Combine(AppContext.BaseDirectory, "data", "training");
-        static readonly string _predictionPath = Path.Combine(AppContext.BaseDirectory, "data", "prediction");
+        // static readonly string _predictionPath = Path.Combine(AppContext.BaseDirectory, "data", "prediction");
 
-        public static string GetTrainingDataFile(string file) => Path.Combine(_trainingPath, file);
+        public static string GetTrainingDataFile(params string[] file) => Path.Combine(_trainingPath, Path.Combine(file));
 
-        public static string GetPredictionDataFile(string file) => Path.Combine(_predictionPath, file);
+        // public static string GetPredictionDataFile(params string[] file) => Path.Combine(_predictionPath, Path.Combine(file));
 
         public static IDataView LoadTrainingData<T>(MLContext context, string file, char sepChar = ',', bool header = false)
         {
@@ -30,17 +30,17 @@ namespace Workshop.Common
             }
         }
 
-        public static string GetModelPath(string file)
+        public static string GetModelPath(params string[] file)
         {
             var path = Path.Combine(AppContext.BaseDirectory, "data", "models");
 
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
 
-            return Path.Combine(path, file);
+            return Path.Combine(path, Path.Combine(file));
         }
 
-        public static ITransformer GetModelData(MLContext context, string file)
+        public static ITransformer GetModelData(MLContext context, params string[] file)
         {
             try
             {

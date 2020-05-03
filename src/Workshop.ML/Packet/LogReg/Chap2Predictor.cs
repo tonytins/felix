@@ -5,7 +5,7 @@ using System;
 using Workshop.Common;
 using Workshop.Models.Restaurant;
 
-namespace Workshop.ML.Chap2
+namespace Workshop.ML.Packet.LogisticRegression
 {
     public class Chap2Predictor : BaseML, IPredict
     {

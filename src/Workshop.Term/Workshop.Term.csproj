@@ -17,18 +17,18 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="data\training\CarInventoryTest.csv">
+        <None Update="data\packet\CarInventoryTest.csv">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="data\training\CarInventoryTraining.csv">
+        <None Update="data\packet\CarInventoryTraining.csv">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="data\training\EmploymentHistoryTraining.csv">
+        <None Update="data\packet\EmploymentHistoryTraining.csv">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="data\training\RestaurantFeedbackTraining.csv">
+        <None Update="data\packet\RestaurantFeedbackTraining.csv">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
     </ItemGroup>
-
+    
 </Project>
