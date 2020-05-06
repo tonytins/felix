@@ -1,5 +1,5 @@
-# Created by https://www.gitignore.io/api/rider,linux,macos,dotenv,backup,windows,visualstudio,visualstudiocode
-# Edit at https://www.gitignore.io/?templates=rider,linux,macos,dotenv,backup,windows,visualstudio,visualstudiocode
+# Created by https://www.gitignore.io/api/rider,linux,macos,dotenv,backup,windows,libreoffice,visualstudio,visualstudiocode
+# Edit at https://www.gitignore.io/?templates=rider,linux,macos,dotenv,backup,windows,libreoffice,visualstudio,visualstudiocode
 
 ### Backup ###
 *.bak
@@ -10,6 +10,10 @@
 
 ### dotenv ###
 .env
+
+### LibreOffice ###
+# LibreOffice locks
+.~lock.*#
 
 ### Linux ###
 *~
@@ -490,4 +494,4 @@ healthchecksdb
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
 
-# End of https://www.gitignore.io/api/rider,linux,macos,dotenv,backup,windows,visualstudio,visualstudiocode
+# End of https://www.gitignore.io/api/rider,linux,macos,dotenv,backup,windows,libreoffice,visualstudio,visualstudiocode

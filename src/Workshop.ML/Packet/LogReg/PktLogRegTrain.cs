@@ -13,7 +13,7 @@ namespace Workshop.ML.Packet.LogisticRegression
         public void Train()
         {
             var modelPath = WorkshopHelper.GetModelPath("RestaurantFeedback.zip"); 
-            var trainingData = WorkshopHelper.GetTrainingDataFile("packet", "packt", "RestaurantFeedbackTraining.csv");
+            var trainingData = WorkshopHelper.GetTrainingDataFile("packt", "RestaurantFeedbackTraining.csv");
             var trainingDataView = WorkshopHelper.LoadTrainingData<RestaurantFeedback>(Context, trainingData);
 
             // Split sample data into training and test

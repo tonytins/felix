@@ -3,29 +3,28 @@
 // http://mozilla.org/MPL/2.0/.
 using System;
 using Workshop.Common;
-using Workshop.Models.Inventory;
-using Newtonsoft.Json;
 using Workshop.Models.SpamDetect;
 
 namespace Workshop.ML.Packet.MultiClass
 {
     public class PktMultiClassPredict : BaseML, IPredict
     {
-        string JsonFile { get; set; }
+        string CsvFile { get; set; }
 
         public PktMultiClassPredict(string file)
         {
-            JsonFile = file;
+            CsvFile = file;
         }
 
         public void Predict()
         {
-            var modelFile = WorkshopHelper.GetModelPath("packt", "RestaurantFeedback.zip");
+            var modelFile = WorkshopHelper.GetModelPath("Email.zip");
             var mlModel = WorkshopHelper.GetModelData(Context, modelFile);
 
             var predictionEng = Context.Model.CreatePredictionEngine<Email, EmailPrediction>(mlModel);
 
-            var emails = JsonConvert.DeserializeObject<Email[]>(JsonFile);
+            var csvPath = WorkshopHelper.GetPredictionDataFile(CsvFile);
+            var emails = WorkshopHelper.GetCsvData<Email>(file: csvPath);
             
 
             foreach (var email in emails)
@@ -33,7 +32,7 @@ namespace Workshop.ML.Packet.MultiClass
                 var predictions = predictionEng.Predict(email);
                 Console.WriteLine(
                 $"Based on input json:{Environment.NewLine}" +
-                $"{JsonFile}{Environment.NewLine}" +
+                $"{CsvFile}{Environment.NewLine}" +
                 $"The email is predicted to be a {predictions.Category}");
             }
             

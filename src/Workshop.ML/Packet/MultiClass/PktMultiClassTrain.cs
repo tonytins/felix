@@ -3,6 +3,7 @@
 // http://mozilla.org/MPL/2.0/.
 using System;
 using Microsoft.ML;
+using Microsoft.ML.Data;
 using Workshop.Common;
 using Workshop.Models.Inventory;
 using Workshop.Models.SpamDetect;
@@ -13,9 +14,9 @@ namespace Workshop.ML.Packet.MultiClass
     {
         public void Train()
         {
-            var modelPath = WorkshopHelper.GetModelPath("RestaurantFeedback.zip");
+            var modelPath = WorkshopHelper.GetModelPath("Email.zip");
             var trainingData = WorkshopHelper.GetTrainingDataFile("packt", "EmailTraining.csv");
-            var trainingDataView = WorkshopHelper.LoadTrainingData<Email>(Context, trainingData);
+            var trainingDataView = WorkshopHelper.LoadTrainingData<Email>(Context, trainingData, shuffle: true);
 
             var dataProcessingPipeline = Context.Transforms.Conversion.MapValueToKey(inputColumnName: nameof(Email.Category), outputColumnName: "Label")
                 .Append(Context.Transforms.Text.FeaturizeText(inputColumnName: nameof(Email.Subject), outputColumnName: "SubjectFeaturized"))

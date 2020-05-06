@@ -2,7 +2,11 @@
 // If a copy of the MPL was not distributed with this file, You can obtain one at
 // http://mozilla.org/MPL/2.0/.
 using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
+using CsvHelper;
+using CsvHelper.Configuration;
 using Microsoft.ML;
 
 namespace Workshop.Common
@@ -12,17 +16,51 @@ namespace Workshop.Common
         static readonly string _trainingPath = Path.Combine(AppContext.BaseDirectory, "data", "training");
         static readonly string _predictionPath = Path.Combine(AppContext.BaseDirectory, "data", "prediction");
 
+        /// <summary>
+        /// Gets the training file located in data/training/ of the application's directory.
+        /// </summary>
+        /// <param name="file">training file</param>
+        /// <returns>training file with it's path</returns>
         public static string GetTrainingDataFile(params string[] file) => Path.Combine(_trainingPath, Path.Combine(file));
 
+        /// <summary>
+        /// Gets the prediction file located in data/prediction/ of the application's directory.
+        /// </summary>
+        /// <param name="file">prediction file</param>
+        /// <returns>prediction file with it's path</returns>
         public static string GetPredictionDataFile(params string[] file) => Path.Combine(_predictionPath, Path.Combine(file));
 
-        public static IDataView LoadTrainingData<T>(MLContext context, string file, char sepChar = ',', bool header = false)
+        public static IEnumerable<T> GetCsvData<T>(bool header = true, params string[] file)
+        {
+            var path = Path.Combine(file);
+            using var data = new StreamReader(path);
+            var csConfig = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                HasHeaderRecord = header
+            };
+            using var csv = new CsvReader(data, CultureInfo.InvariantCulture);
+            return csv.GetRecords<T>();
+        }
+
+        /// <summary>
+        /// Loads the training data 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="context"></param>
+        /// <param name="file"></param>
+        /// <param name="sepChar"></param>
+        /// <param name="header"></param>
+        /// <param name="shuffle"></param>
+        /// <returns></returns>
+        public static IDataView LoadTrainingData<T>(MLContext context, string file, char sepChar = ',', bool header = false, bool shuffle = false)
         {
             try
             {
-                var path = Path.Combine(_trainingPath, file);
-                var trainingDataView = context.Data.LoadFromTextFile<T>(path, separatorChar: sepChar, hasHeader: header);
-                return context.Data.ShuffleRows(trainingDataView);
+                var trainingDataView = context.Data.LoadFromTextFile<T>(file, separatorChar: sepChar, hasHeader: header);
+                if (shuffle)
+                    return context.Data.ShuffleRows(trainingDataView);
+                else
+                    return trainingDataView;
             }
             catch (IOException err)
             {
@@ -30,6 +68,12 @@ namespace Workshop.Common
             }
         }
 
+        /// <summary>
+        /// Gets the training data located in data/models/ of the application's base directory.
+        /// If the data/models doesn't exist, it'll be created.
+        /// </summary>
+        /// <param name="file">ML model</param>
+        /// <returns></returns>
         public static string GetModelPath(params string[] file)
         {
             var path = Path.Combine(AppContext.BaseDirectory, "data", "models");
