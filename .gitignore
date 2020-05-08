@@ -1,5 +1,5 @@
-# Created by https://www.gitignore.io/api/rider,linux,macos,dotenv,backup,windows,libreoffice,visualstudio,visualstudiocode
-# Edit at https://www.gitignore.io/?templates=rider,linux,macos,dotenv,backup,windows,libreoffice,visualstudio,visualstudiocode
+# Created by https://www.gitignore.io/api/rider,linux,macos,dotenv,backup,windows,libreoffice,visualstudio,jupyternotebooks,visualstudiocode
+# Edit at https://www.gitignore.io/?templates=rider,linux,macos,dotenv,backup,windows,libreoffice,visualstudio,jupyternotebooks,visualstudiocode
 
 ### Backup ###
 *.bak
@@ -10,6 +10,20 @@
 
 ### dotenv ###
 .env
+
+### JupyterNotebooks ###
+# gitignore template for Jupyter Notebooks
+# website: http://jupyter.org/
+
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# IPython
+profile_default/
+ipython_config.py
+
+# Remove previous ipynb_checkpoints
+#   git rm -r .ipynb_checkpoints/
 
 ### LibreOffice ###
 # LibreOffice locks
@@ -494,4 +508,4 @@ healthchecksdb
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
 
-# End of https://www.gitignore.io/api/rider,linux,macos,dotenv,backup,windows,libreoffice,visualstudio,visualstudiocode
+# End of https://www.gitignore.io/api/rider,linux,macos,dotenv,backup,windows,libreoffice,visualstudio,jupyternotebooks,visualstudiocode
