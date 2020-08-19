@@ -13,22 +13,19 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-using CommandLine;
+using System;
 
-namespace Workshop.Term
+namespace Workshop.Common
 {
-    public class BaseOptions
-    {
-        [Option('c', "chapter")]
-        public string Chapter { get; set; }
-
-        [Option('i', "input")]
-        public string Input { get; set; }
-    }
-
-    [Verb("train")]
-    public class TrainOption : BaseOptions { }
-
-    [Verb("predict")]
-    public class PredictOption : BaseOptions { }
+ public static class Terminal
+ {
+  public static string ReadLine
+  {
+   get
+   {
+    Console.Write('>');
+    return Console.ReadLine();
+   }
+  }
+ }
 }

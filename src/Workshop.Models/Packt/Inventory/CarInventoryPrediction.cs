@@ -13,22 +13,16 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-using CommandLine;
-
-namespace Workshop.Term
+namespace Workshop.Models.Packt.Inventory
 {
-    public class BaseOptions
+    public class CarInventoryPrediction
     {
-        [Option('c', "chapter")]
-        public string Chapter { get; set; }
+        public bool Label { get; set; }
 
-        [Option('i', "input")]
-        public string Input { get; set; }
+        public bool PredictedLabel { get; set; }
+
+        public float Score { get; set; }
+
+        public float Probability { get; set; }
     }
-
-    [Verb("train")]
-    public class TrainOption : BaseOptions { }
-
-    [Verb("predict")]
-    public class PredictOption : BaseOptions { }
 }

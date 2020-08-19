@@ -9,6 +9,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="SpamDetect\" />
+      <Folder Include="Packt\SpamDetect\" />
     </ItemGroup>
 </Project>

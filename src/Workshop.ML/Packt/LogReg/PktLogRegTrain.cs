@@ -1,19 +1,35 @@
-// This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0.
-// If a copy of the MPL was not distributed with this file, You can obtain one at
-// http://mozilla.org/MPL/2.0/.
+/*
+ *   Copyright 2020 Anthony Leland
+ *
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ */
 using System;
 using Microsoft.ML;
 using Workshop.Common;
-using Workshop.Models.Restaurant;
+using Workshop.Models.Packt.Restaurant;
 
-namespace Workshop.ML.Packet.LogisticRegression
+namespace Workshop.ML.Packt.LogisticRegression
 {
     public class PktLogRegTrain : BaseML, ITrainer
     {
+        public PktLogRegTrain(string file = "RestaurantFeedbackTraining.csv", string modelFile = "RestaurantFeedback.zip") : base(file, modelFile)
+        {
+        }
+
         public void Train()
         {
-            var modelPath = WorkshopHelper.GetModelPath("RestaurantFeedback.zip"); 
-            var trainingData = WorkshopHelper.GetTrainingDataFile("packt", "RestaurantFeedbackTraining.csv");
+            var modelPath = WorkshopHelper.GetModelPath(ModelFile);
+            var trainingData = WorkshopHelper.GetTrainingDataFile("packt", TrainingFile);
             var trainingDataView = WorkshopHelper.LoadTrainingData<RestaurantFeedback>(Context, trainingData);
 
             // Split sample data into training and test

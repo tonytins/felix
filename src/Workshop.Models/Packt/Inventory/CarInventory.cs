@@ -13,22 +13,25 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-using CommandLine;
+using Microsoft.ML.Data;
 
-namespace Workshop.Term
+namespace Workshop.Models.Packt.Inventory
 {
-    public class BaseOptions
+    public class CarInventory
     {
-        [Option('c', "chapter")]
-        public string Chapter { get; set; }
+        [LoadColumn(0)]
+        public float HasSunroof { get; set; }
 
-        [Option('i', "input")]
-        public string Input { get; set; }
+        [LoadColumn(1)]
+        public float HasAC { get; set; }
+
+        [LoadColumn(2)]
+        public float HasAutomaticTransmission { get; set; }
+
+        [LoadColumn(3)]
+        public float Amount { get; set; }
+
+        [LoadColumn(4)]
+        public bool Label { get; set; }
     }
-
-    [Verb("train")]
-    public class TrainOption : BaseOptions { }
-
-    [Verb("predict")]
-    public class PredictOption : BaseOptions { }
 }

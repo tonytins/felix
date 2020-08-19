@@ -13,22 +13,21 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-using CommandLine;
+using Microsoft.ML.Data;
 
-namespace Workshop.Term
+namespace Workshop.Models.Packt.SpamDetect
 {
-    public class BaseOptions
+    public class Email
     {
-        [Option('c', "chapter")]
-        public string Chapter { get; set; }
+        [LoadColumn(0)]
+        public string Subject { get; set; }
+        [LoadColumn(1)]
+        public string Body { get; set; }
+        [LoadColumn(2)]
+        public string Sender { get; set; }
+        [LoadColumn(3)]
+        public string Category { get; set; }
 
-        [Option('i', "input")]
-        public string Input { get; set; }
+
     }
-
-    [Verb("train")]
-    public class TrainOption : BaseOptions { }
-
-    [Verb("predict")]
-    public class PredictOption : BaseOptions { }
 }

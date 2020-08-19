@@ -13,22 +13,13 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-using CommandLine;
+using Microsoft.ML.Data;
 
-namespace Workshop.Term
+namespace Workshop.Models.Packt.Employement
 {
-    public class BaseOptions
+    public class EmploymentHistoryPrediction
     {
-        [Option('c', "chapter")]
-        public string Chapter { get; set; }
-
-        [Option('i', "input")]
-        public string Input { get; set; }
+        [ColumnName("Score")]
+        public float DurationInMonths { get; set; }
     }
-
-    [Verb("train")]
-    public class TrainOption : BaseOptions { }
-
-    [Verb("predict")]
-    public class PredictOption : BaseOptions { }
 }

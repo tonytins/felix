@@ -13,22 +13,10 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-using CommandLine;
-
-namespace Workshop.Term
+namespace Workshop.Common
 {
-    public class BaseOptions
+    internal struct MLConsts
     {
-        [Option('c', "chapter")]
-        public string Chapter { get; set; }
-
-        [Option('i', "input")]
-        public string Input { get; set; }
+        public const int SEED = 2020;
     }
-
-    [Verb("train")]
-    public class TrainOption : BaseOptions { }
-
-    [Verb("predict")]
-    public class PredictOption : BaseOptions { }
 }

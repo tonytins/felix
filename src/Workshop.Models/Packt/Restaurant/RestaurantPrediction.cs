@@ -13,22 +13,17 @@
  *   See the License for the specific language governing permissions and
  *   limitations under the License.
  */
-using CommandLine;
+using Microsoft.ML.Data;
 
-namespace Workshop.Term
+namespace Workshop.Models.Packt.Restaurant
 {
-    public class BaseOptions
+    public class RestaurantPrediction
     {
-        [Option('c', "chapter")]
-        public string Chapter { get; set; }
+        [ColumnName("PredictedLabel")]
+        public bool Prediction { get; set; }
 
-        [Option('i', "input")]
-        public string Input { get; set; }
+        public float Probability { get; set; }
+
+        public float Score { get; set; }
     }
-
-    [Verb("train")]
-    public class TrainOption : BaseOptions { }
-
-    [Verb("predict")]
-    public class PredictOption : BaseOptions { }
 }
