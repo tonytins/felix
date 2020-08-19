@@ -19,5 +19,6 @@ namespace Workshop.Term
     {
         public const string PktLogReg = "pkt-logreg";
         public const string PktMultiClass = "pkt-multiclass";
+        public const string MsBikeRentels = "ms-bikerentals";
     }
 }
