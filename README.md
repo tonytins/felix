@@ -13,7 +13,7 @@ ML.NET Workshop (or simply MLWorkshop) is a research project into machine learni
 ## Authors
 
 - **Anthony Leland** - _Initial work_ - [tonytins](https://github.com/tonytins)
-- **Packt** - _Training data_ - [PacktPublishing](https://github.com/PacktPublishing)
+- **Packt** - _Training data_ - [Packt Publishing](https://github.com/PacktPublishing)
 - **Microsoft** - _Training Data_ - [dotnet](https://github.com/dotnet)
   
 See also the list of [contributors](https://github.com/tonytins/RyuBook/contributors) who participated in this project.
